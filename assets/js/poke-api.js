@@ -4,7 +4,7 @@ const pokeApi = {}
 
 function convertPokeApiDetailToPokemon(pokeDetail) {
     const pokemon = new Pokemon()
-    pokemon.number = pokeDetail.order
+    pokemon.number = pokeDetail.id
     pokemon.name = pokeDetail.name
 
     const types = pokeDetail.types.map((typeSlot) => typeSlot.type.name) 
@@ -25,7 +25,7 @@ pokeApi.getPokemonDetail = (pokemon) => {
         .then(convertPokeApiDetailToPokemon)
 }
 
-pokeApi.getPokemons = (offset = 0, limit = 5) => {
+pokeApi.getPokemons = (offset = 0, limit = 10) => {
     const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
     
     return fetch(url)   //buscou a lista de pokemons no servidor
@@ -37,11 +37,3 @@ pokeApi.getPokemons = (offset = 0, limit = 5) => {
        // .catch((error) => console.error(error))  //codigo de erro
 }
 
-/*Promise.all([
-    fetch('https://pokeapi.co/api/v2/pokemon/1'),
-    fetch('https://pokeapi.co/api/v2/pokemon/2'),
-    fetch('https://pokeapi.co/api/v2/pokemon/3'),
-    fetch('https://pokeapi.co/api/v2/pokemon/4')
-]).then((results) => {
-    console.log(results)
-})*/
